@@ -1,0 +1,80 @@
+grammar pazmysaz.Pyke with org.eclipse.xtext.common.Terminals
+
+generate pyke "http://www.Pyke.pazmysaz"
+
+Dashboard:
+	'dashboard' name=STRING
+	'{'
+	   (identity=Identity)?
+	   (labelSummary=LabelSummary)?
+	   (distributionSummary?=DistributionSummary)?
+	   (trendSummary?=TrendSummary)?
+	   (report=Report)?
+	   	
+	'}';
+
+
+
+
+TrendSummary:
+	'trendsummary' name=STRING
+	'{'
+		lhs=Section
+		(mhs=Section)?
+		(rhs=Section)?
+		(edge+=Section)*
+	'}'
+;
+
+ DistributionSummary:
+	'distributionsummary' name=STRING
+	'{'
+		lhs=Section
+		(mhs=Section)?
+		(rhs=Section)?
+		(edge+=Section)*
+	'}'
+;
+
+ LabelSummary:
+	'labelsummary' name=STRING
+	'{'
+		lhs=Section
+		(mhs=Section)?
+		(rhs=Section)?
+		(edge+=Section)*
+	'}'
+;
+
+Identity:
+'identitylevel' name=STRING
+	'{'
+		lhs=Section
+		(mhs=Section)?
+		(rhs=Section)?
+		(edge+=Section)*
+	'}'
+;
+
+Report:
+	'grid' name=STRING
+	'{'
+		(section=Section)?
+	'}'
+	;
+
+Section:
+	'presented' 'as' presentationType=Widget  'fields' 'from' source=STRING 'through'
+	'{'
+		value=STRING
+	'}'
+;
+
+enum Widget:
+	reportcard|eventiles|pie|histogram|dbar|badge|grid
+;
+
+
+
+
+	
